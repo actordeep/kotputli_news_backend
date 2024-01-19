@@ -1,0 +1,486 @@
+Laravel Uses MVC Pattern(Model, View, Controller) (reusability, easy to maintain application, many developers work at a time)
+MVC separetes business logic from application 
+Model - Database (get the data)
+View - The things we see in the browser
+(Server)Controller - Server connects the Model with the View (and visualises it)(manages everything)
+
+
+Files in the project folder:
+Middleware - security, authentication(which user can use something)
+config - Configuration files
+database -> migrations - create database tables
+public - css, theme files
+resources -> views - the things we see in the browser
+route -> web.php - manage routes, create pages in the browser
+vendor - default packages
+.env - database connection
+
+
+Routing - creating request url of application, route all application request to controller
+ - Get method - fetch data
+ - Post method - insert data
+ - Put method - add data
+ - Patch method - update data
+
+index.blade.php - .blade. is how php files are named in laravel
+blade is a type of syntax(laravel syntax)
+
+Create Controller:
+php artisan make:controller ContactController
+We type the route of the controller, and we add methods in http->controllers
+
+Create Middleware:
+php artisan make:middleware CheckAge
+After creating a middleware we have to register it in kernel.php
+
+.env - change the database name(DB_DATABASE) to that, that you are using
+
+Install Jetstream from documentation:
+https://jetstream.laravel.com/2.x/installation.html
+
+app->actions->fortify.php and actions->jetstream.php this are jetstream functionality files
+
+resources->views->layouts - app and guest files are our jetstream css and js
+
+config->fortify.php and config->jetstream.php
+-> 'features', this is where jetstream functions are, we can remove or add them from there
+
+When we installed laravel, app->models->User.php, when we work with anything with the db, we work with models
+
+
+
+
+Folder 2 - Video 17 - Create model and migration(table)
+1.)We create link in navigation, with a route name
+php artisan make:model Category -m - creates both model and migration
+2.)Add table fields in the migration table file
+3.)In the web area we create the controller, name should be the route name, we write our method 
+4.)We go to the controller and create the method and we return the page we want to view
+
+
+Folder 2 - Video 18 - Validation
+1.) Add another route in web.php, if we insert data it should be a post method
+2.) Add another function in the Controller and we can validate the fields that are inserted in the DB, documentation on validation on laravel website
+3.) Add @error to our blade file
+
+
+Folder 2 - Video 19 - Insert Data Eloquent ORM
+1.)Add Insert to the Controller
+2.)Add Session 'success' to the blade page the action is happening
+
+
+Folder 2 - Video 20 - Insert Data with Query Builder
+1.)Add Insert code to Controller
+
+
+Folder 2 - Video 21 - Get Data with Eloquent ORM
+1.)Add function in Controller to get all the data
+2.)Foreach data in blade page
+
+
+Folder 2 - Video 22 - Get Data with Query Builder
+1.)Add function in Controller to get all the data
+2.)Foreach data in blade page
+
+
+Folder 2 - Video 23 - Pagination
+1.)Controller ->pagination()
+2.)Code in blade page
+
+
+Folder 2 - Video 24 - Eloquent ORM - One to One relations
+1.) we add a function in our Model
+2.) Add the function in the blade page
+
+
+Folder 2 - Video 25 - Query builder JOIN
+1.) add code to controller
+2.) we simply call the column name in the blade page, after the fields are joined
+
+
+Folder 2 - Video 26 - Edit and Update Eloquent ORM
+1.)Add the id to the edit button of our item we want to edit
+2.)Add route in web.php with new link and to our new function
+3.)Get Data in our new function(Edit) and send it to our new blade page
+4.)Edit our edit blade page(html)
+5.)Add action to form
+6.)Add Update route and function in web.php
+7.)Create new Update function and return
+
+
+Folder 2 - Video 27 - Edit and Update Query builder
+Everything is the same except in the Category Controller
+
+
+Folder 2 - Video 28 - Soft Delete,Data Restore and ForceDelete 
+1.)Add variable in Controller to show the SoftDeletes
+2.)Make place where the SoftDeletes will be shown and add href to the delete button
+3.)We make method in Category Controller
+
+
+Folder 2 - Video 29 - Soft Delete,Data Restore and ForceDelete Part 2
+1.)add restore href to button
+2.)create route in web.php
+3.)create method
+
+When any user clicks Restore we go to web.php, there we create a route and type the controller and tell which method in the controller to be activated
+
+
+Folder 2 - Video 30 - Brand Creation
+1.)We create link in navigation, with a route name
+2.)creates both model and migration : php artisan make:model Category -m
+3.)Create Controller : php artisan make:controller ContactController
+4.)Add our controller in web.php at the top of the page and create Route
+5.)We create our method in our controller
+6.)Add folder and index blade page for the model
+7.)Create the database fields in the migration file
+8.)php artisan migrate - to add to the db
+9.)Add fields of the DB in our Model
+10.)use our model, at the top of the page in Controller page
+11.)Get all data and compact it so we can use it in index page
+12.)Edit index page
+
+
+Folder 2 - Video 31 - Eloquent ORM Insert Image
+1.)change route in form
+2.)add enctype to form : enctype="multipart/form-data"
+3.)add route
+4.)type method in controller
+5.)add carbon with use
+6.)show image in index page
+
+
+Folder 2 - Video 32 - Edit, Update Data with Image and Without Image Part 1
+1.)change route in form
+2.)add route 
+3.)add method
+4.)create edit blade page
+
+
+Folder 2 - Video 33 - Edit, Update Data with Image and Without Image Part 2
+1.)when we update with new image, old image would be needed, we have to replace it
+we add hidden field to save our old image path
+2.)add route
+3.)Create method
+4.)delete old image and replace it with the new one in controller method
+5.)make if else, so we can update only the name
+
+
+Folder 2 - Video 34 - Delete Data with image
+1.)add href to delete button
+2.)add route
+3.)Create method in Controller
+
+
+Folder 2 - Video 35 - Image Insert and resize with intervention package (adding specific image size)
+1.)Install Intervention from website with composer in laravel folder 
+2.)We have to add code in $providers(app.php), it is all in the documentation
+3.)Then we have to publish the configuration(from documentation)
+4.)Use Image in Controller
+5.)Type the code
+
+
+Folder 2 - Video 36 - Multiple Image Upload Part 1
+1.)creates both model and migration : php artisan make:model Category -m (creates database table, so we can add fields and then merge)
+2.)add db fileds
+3.)php artisan migrate - to add to the db
+4.)protect our fields in the Model
+5.)Add navigation field for Multi Image
+6.)Create route with existing controller 
+7.)write our method there
+8.)create new index page for multiple images
+
+
+Folder 2 - Video 37 - Multiple Image Upload Part 2
+1.)add multiple to img tag
+2.)add form route
+3.)add web.php route
+4.)create method
+5.)display with foreach
+
+
+Folder 2 - Video 38 - Update User Profile and change password
+1.)php artisan storage:link - create profile photo folder
+2.)we update the server from localhost in .env APP_URL
+3.)config jestream.php and fortify.php we can change jetstream functionality
+4.)providers->routeServices to change /dashboard
+
+
+Folder 2 - Video 39 - Forget Password and Password Reset
+1.)in .env - https://mailtrap.io/inboxes/1273939/messages add MAIL SMTP
+2.)remove app_url and close cmd server
+3.)add mail from adress
+
+
+Folder 2 - Video 40 - Email Verify in Laravel
+1.)Email Verification documentation in laravel website
+2.)add implements in User Model
+3.)add route
+4.)enable email verification in fortify.php
+
+
+Folder 2 - Video 41 - Middleware Auth Users Access Control
+1.)add construct function in Controller
+
+
+Folder 2 - Video 43 - Admin Panel Setup - add template to laravel, changing the default template part 1
+Watch video, it is explained or see the code that is uploaded in github
+
+
+Folder 2 - Video 43 - Admin Panel Setup - add template to laravel, changing the default template part 2
+1.)Create 2 files in the admin folder
+2.)in admin master we load the main theme
+3.)add frontend and backend folders in public project folder
+4.)add index.html in admin_master.blade.php
+5.)add @yield('admin'), that way we add dynamic content to our page
+6.)in another file we paste our content and between the content we add
+@extends('admin.admin_master')
+
+@section('admin')
+// content
+@endsection
+
+in admin master we have the static things - header and footer and in index.blade.php we have the dynamic part(the content)
+
+
+Folder 2 - Video 44 - Admin Panel Setup - add template to laravel, changing the default template - 3
+Watch video, it is explained or see the code that is uploaded in github
+
+
+Folder 2 - Video 45 - Logout Page Setup
+1.)Adding route to the LogOut button 
+2.)writing Route in web.php
+3.)creating the method to logout in the controller
+4.)we use Auth in the controller page so we can use Auth::logout()
+
+
+Folder 2 - Video 46 - Login Page Setup
+1.)changing the login.blade.php(in auth folder) with our .html code that we want to use for login
+2.)replacing the form in login.blade.php with our .html
+3.)php artisan r:l - shows the list of default routes
+
+
+Folder 2 - Video 47 - Frontend Setup  - Part 1
+1.)Main route - view('welcome')
+2.)Creating master_home.blade.php in layouts
+3.)Creating home.blade.php in views folder
+4.)in master_home.blade.php we add css,js
+5.)we add in public folder our frontend styles and js
+6.)Same things as in admin
+
+
+Folder 2 - Video 48 - Frontend Setup  - Part 2
+1.)Same thing as in admin
+
+
+Folder 2 - Video 49 - Setup home brand page
+1.)changing admin sidebar links with routes we have created in web.php
+2.)remove index.blade.php(brand folder) x-app-layout
+3.)add 
+@extends('admin.admin_master')
+
+@section('admin')
+
+@endsection
+
+so we can show our template 
+4.)displaying our brands in the home page
+4.1 we pass the data in web.php in our route
+4.2 Then we display the images in home.blade.php
+
+
+Folder 2 - Video 50 Setup Home Slider Page Part 1
+1.)creates both model and migration : php artisan make:model Category -m
+2.)make db fileds in migration
+3.)migrate in cmd
+4.)protect fields in the model
+5.)adding link in the admin sidebar
+6.)Create Controller : php artisan make:controller ContactController
+7.)Add our controller in web.php at the top of the page and create Route
+8.)create view page and return in method in Controller
+9.)Pass the data in the Controller so we have it in the page
+10.)use the model in controller page
+Note: ->links() in blade page works with pagination in Controller
+11.)Create the view page and button
+
+
+Folder 2 - Video 51 Setup Home Slider Page Part 2
+1.)Add button route
+2.)Add route in web.php
+3.)creating create blade page
+4.)adding form from the admin template
+5.)adding form route
+6.)adding web.php route
+7.)creating add method
+
+
+Folder 2 - Video 52 Setup Home Slider Page Part 3 - making the slider data visible
+1.)We have to get the data in the blade page
+2.)use 
+@php
+
+@endphp 
+in slider page
+3.)get the data from the DB with @php 
+4.)foreach the data 
+
+
+Folder 2 - Video 53 Setup Home page About Section Part 1
+Same as Folder 2 - Video 50 Setup Home Slider Page Part 1
+
+
+Folder 2 - Video 54 Setup Home page About Section Part 2
+Same as Folder 2 - Video 51 Setup Home Slider Page Part 2
+
+
+Folder 2 - Video 55 Setup Home page About Section Part 3 - Edit 
+1.)Add route to edit button and add route in web.php
+2.)create edit page to display the fields from the DB
+3.)Create Update route 
+4.)Create Update method
+
+
+Folder 2 - Video 56 Setup Home page About Section Part 4 - Delete
+1.)Add route to delete button and add route in web.php
+3.)Create Delete route 
+4.)Create Delete method
+
+
+Folder 2 - Video 57 Setup Home page About Section Part 5 - Show in Home Page
+1.)get the data in the home page by passing it in the web.php route 
+2.)then display the data in home.blade.php
+3.)we get only the first data by calling ->first(), but there should be a way to select which about us we want to choose?, this is by choice 
+
+
+Folder 2 - Video 58 - Setup Home Page Portfolio Section
+1.)Making link to the multimage in sidebar
+2.)Making the add multiimage page match our new theme
+3.)If we want to use ELOQUENT ORM we have to load our model first
+4.)We pass the data to our page
+5.)We display the data
+
+
+Folder 2 - Video 59 - Setup Portfolio Section
+1.)Get Portfolio .html from theme
+2.)get only the main tag from the .html file
+3.)add @extends and @section to our portfolio.blade.php (we created a folder for it too (called pages) )
+
+
+Folder 2 - Video 60 - Setup Contact Page Part 1
+Folder 2 - Video 61 - Setup Contact Page Part 2
+Folder 2 - Video 62 - Setup Contact Page Part 3
+I have done all of this alone
+
+
+Folder 2 - Video 63 - Setup Contact Page Part 4
+1.)don't forget to add @csrf when you are submitting a form it gives error 419
+2.)other stuff is the same 
+
+
+Folder 2 - Video 64 - Setup Contact Page Part 5
+1.)displaying the data in the backend(i have done all of this, nothing new)
+
+
+Folder 2 - Video 65 - Change Password Option Part 1
+1.)Add {{ Auth::user()->name }} to display the current user details
+2.)Add {{ Auth::user()->profile_photo_url }} to show the user photo
+3.)Create route for the change password 
+4.)Create Controller for the change password
+5.)Create method to navigate to the change password page
+6.)Setup the change password fields from the template inputs
+
+
+Folder 2 - Video 66 - Change Password Option Part 2
+1.)We change the id's for the inputs in the page we created for password change
+We get the id's from the auth files, that are automatically created by jetstream
+2.)Add name
+3.)Add validation
+4.)Add csrf token!!!!!!
+5.)Add route and create method
+
+
+Folder 2 - Video 67 - Change Password Option Part 3
+1.)create validation
+2.)create method by hashing and comparing the passwords
+
+
+Folder 2 - Video 68 - Change User Profile Part 1
+1.)Create routes
+2.)Create method
+3.)Create page (copy change_password.blade.php and change fields)
+
+
+Folder 2 - Video 69 - Change User Profile Part 2
+1.)create route
+2.)create method
+
+
+Folder 2 - Video 70 - Adding Toaster
+1.)add toaster css and js
+2.)type another script for the different types of toaster in admin_master
+3.)we are making toaster appear on brand index page
+4.)we remove the laravel session('success')
+5.)adding the toaster code in the controller method
+
+
+
+
+Use php artisan storage:link to create folder for the user photos
+Folder 3 - Video 5 - Setup Admin Table and Seed data
+1.)php artisan r:l, see routes in the project
+2.)Create Controller : php artisan make:controller ContactController
+3.)Create Model and migration file : php artisan make:model Admin -m
+4.)Copy fields from users model and paste them in the Admin model
+5.)Copy Users model and paste in Admin
+6.)php artisan migrate
+7.)Create factory for Admin
+php artisan make:factory AdminFactory
+8.)Copy the return from UserFactory and paste in AdminFactory
+9.)Change return fields for admin
+10.)Add Str in AdminFactory
+11.)Uncomment the function in seeders(DatabaseSeeder) and change User->Admin
+Factory - the data we insert into the database
+Seeders - we add Database information from there (we seed the data that is in the factory)
+12.)php artisan migrate --seed
+We add the demo data like that(that we have created in the Factory
+
+
+Folder 3 - Video 6 - Creating Guards for Admin
+1.)Creating a guard in config->auth.php
+2.)Creating a provider for Admin
+3.)Creating passwords for Admin
+4.)We open AuthenticatedSessionController.php
+We create another login for admin, the one we have in this file is for the user
+5.)With this command we check what is the default guard in __construct function: 
+dd($this->guard);
+6.)We open Providers->FortifyServiceProvider.php
+7.)we return in register function and use classes we use in the function at the top of the page
+8.)Create new folder in app -> guards
+9.)We copy everything for StatefulGuard.php from the user and paste it in the new file we have created for the AdminStatefulGuard.php
+
+
+Folder 3 - Video 7 - Multi Auth Part 1 
+1.)Change namespace and interface name
+2.)We copy AuthenticatedSessionController.php and paste it in our AdminController.php and change the contents
+3.)Create routes for admin login 
+4.)in AdminController we create the method for login
+5.)Update login.blade.php route to check whether an admin is logging in or a user
+6.)We go to vendor\laravel\fortify\src\Actions
+7.)Copy AttemptToAuthenticate.php and RedirectIfTwoFactorAuthenticatable.php
+8.)Paste the files in app\Actions\Fortify
+9.)Update namespaces
+
+
+Folder 3 - Video 8 - Multi Auth Part 2
+1.)In Providers -> RouteServiceProviders.php Create function for admin login, so it returs admin/dashboard
+2.)In Middleware -> RedirectIfAuthenticated and change the return
+3.)Create new Middleware for Admin 
+4.)register the middleware in the Kernel
+5.)Create new folder in Http -> Responses and create LoginResponse.php
+6.)Copy LoginResponse that is default for the user and paste it in the new file that is for the Admin 
+7.)change the redirect
+
+
+Folder 3 - Video 9 - Multi Auth Part 3
+Folder 3 - Video 10 - Multi Auth Part 3
+Both videos are for fixes only 

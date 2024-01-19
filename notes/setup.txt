@@ -1,0 +1,13 @@
+Install Composer Globally from website:
+https://getcomposer.org/download/
+Install laravel installer globally:
+https://laravel.com/docs/7.x/installation
+laravel new {project name}
+Install Jetstream from documentation:
+https://jetstream.laravel.com/2.x/installation.html
+
+Add Path: https://stackoverflow.com/questions/31291317/php-is-not-recognized-as-an-internal-or-external-command-in-command-prompt/31291404 if it isn't there
+Install Composer in project folder (from composer documentation) : https://getcomposer.org/download/
+Install NodeJs(optional, not needed to run laravel, it was required to download for the project i was creating)
+Composer Create Project (from laravel documentation): (in project folder)
+php composer.phar create-project laravel/laravel *project name*
